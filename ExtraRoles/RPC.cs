@@ -51,6 +51,7 @@ namespace ExtraRolesMod
         ResetVaribles = 51,
         SetLocalPlayers = 56,
         JokerWin = 57,
+        SetDetector = 58,
     }
 
     [HarmonyPatch(typeof(PlayerControl), nameof(PlayerControl.HandleRpc))]
@@ -100,10 +101,12 @@ namespace ExtraRolesMod
                         OfficerSettings.ClearSettings();
                         EngineerSettings.ClearSettings();
                         JokerSettings.ClearSettings();
+                        DetectorSettings.ClearSettings();
                         MedicSettings.SetConfigSettings();
                         OfficerSettings.SetConfigSettings();
                         EngineerSettings.SetConfigSettings();
                         JokerSettings.SetConfigSettings();
+                        DetectorSettings.SetConfigSettings();
                         killedPlayers.Clear();
                         break;
                     }
@@ -176,6 +179,19 @@ namespace ExtraRolesMod
                             if (player.PlayerId == JokerId)
                             {
                                 JokerSettings.Joker = player;
+                            }
+                        }
+                        break;
+                    }
+                case (byte)CustomRPC.SetDetector:
+                    {
+                        ConsoleTools.Info("Detector Set Through RPC!");
+                        byte DetectorId = ALMCIJKELCP.ReadByte();
+                        foreach (PlayerControl player in PlayerControl.AllPlayerControls)
+                        {
+                            if (player.PlayerId == DetectorId)
+                            {
+                                DetectorSettings.Detector = player;
                             }
                         }
                         break;

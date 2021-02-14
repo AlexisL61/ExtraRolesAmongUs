@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using System;
 using System.Collections.Generic;
+using static ExtraRolesMod.ExtraRoles;
 
 namespace ExtraRolesMod
 {
@@ -80,6 +81,25 @@ namespace ExtraRolesMod
             return closestplayer;
         }
 
+        public static DeadPlayer getClosestBody(PlayerControl refplayer)
+        {
+            double mindist = double.MaxValue;
+            DeadPlayer closestbody = null;
+            foreach (DeadPlayer body in killedPlayers)
+            {
+                if (body.CanBeDetect){
+
+                    double dist = getDistBetweenPlayerAndBody(refplayer, body);
+                    if (dist < mindist)
+                    {
+                        mindist = dist;
+                        closestbody = body;
+                    }
+                }
+            }
+            return closestbody;
+        }
+
         public static PlayerControl getPlayerFromId(byte id)
         {
             foreach (PlayerControl player in PlayerControl.AllPlayerControls)
@@ -94,6 +114,18 @@ namespace ExtraRolesMod
             var playerpos = player.GetTruePosition();
 
             return Math.Sqrt((refpos[0] - playerpos[0]) * (refpos[0] - playerpos[0]) + (refpos[1] - playerpos[1]) * (refpos[1] - playerpos[1]));
+        }
+
+        public static double getDistBetweenPlayerAndBody(PlayerControl player, DeadPlayer body)
+        {
+            if (body == null){
+                return 100;
+            }
+            double bodyPos1 = body.BodyPositionX;
+            double bodyPos2 = body.BodyPositionY;
+            var playerpos = player.GetTruePosition();
+
+            return Math.Sqrt((bodyPos1 - playerpos[0]) * (bodyPos1 - playerpos[0]) + (bodyPos2 - playerpos[1]) * (bodyPos2 - playerpos[1]));
         }
     }
 }

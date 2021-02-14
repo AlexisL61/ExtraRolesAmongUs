@@ -17,6 +17,9 @@ namespace ExtraRoles
     {
         static void Prefix(UnityEngine.Object obj)
         {
+            foreach(DeadPlayer player in killedPlayers){
+                player.CanBeDetect = false;
+            }
             if (ExileController.Instance != null && obj == ExileController.Instance.gameObject)
             {
                 if (JokerSettings.Joker != null)

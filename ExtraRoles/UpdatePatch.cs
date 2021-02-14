@@ -190,6 +190,23 @@ namespace ExtraRolesMod
                         CurrentTarget = null;
                     }
                 }
+                if (DetectorSettings.Detector != null && __instance.UseButton != null && __instance.UseButton.isActiveAndEnabled && DetectorSettings.Detector.PlayerId == PlayerControl.LocalPlayer.PlayerId)
+                {
+                    KillButton.renderer.sprite = clockIco;
+                    KillButton.gameObject.SetActive(true);
+                    KillButton.isActive = true;
+                    DeadPlayer closestBody = PlayerTools.getClosestBody(PlayerControl.LocalPlayer);
+                    double distance = PlayerTools.getDistBetweenPlayerAndBody(PlayerControl.LocalPlayer, closestBody);
+                    if (distance >7){
+                        KillButton.SetCoolDown(0f, 0);
+                        KillButton.enabled = false;
+                    }else{
+                        KillButton.enabled = true;
+                        KillButton.SetCoolDown((float) distance, (float) distance - 1f);
+                        System.Console.WriteLine(distance);
+                    }
+                   
+                }
             }
         }
     }

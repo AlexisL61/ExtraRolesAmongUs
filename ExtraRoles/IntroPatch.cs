@@ -51,6 +51,13 @@ namespace ExtraRolesMod
                 __instance.__this.ImpostorText.Text = "Get voted off of the ship to win";
                 __instance.__this.BackgroundBar.material.color = ModdedPalette.jokerColor;
             }
+            if (PlayerControl.LocalPlayer == DetectorSettings.Detector)
+            {
+                __instance.__this.Title.Text = "Detector";
+                __instance.__this.Title.Color = ModdedPalette.medicColor;
+                __instance.__this.ImpostorText.Text = "Help the crew by detecting [8DFFFF]dead body";
+                __instance.__this.BackgroundBar.material.color = ModdedPalette.medicColor;
+            }
         }
     }
 }

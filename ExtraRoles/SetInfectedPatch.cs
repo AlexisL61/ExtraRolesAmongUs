@@ -16,10 +16,12 @@ namespace ExtraRolesMod
             OfficerSettings.ClearSettings();
             EngineerSettings.ClearSettings();
             JokerSettings.ClearSettings();
+            DetectorSettings.ClearSettings();
             MedicSettings.SetConfigSettings();
             OfficerSettings.SetConfigSettings();
             EngineerSettings.SetConfigSettings();
             JokerSettings.SetConfigSettings();
+            DetectorSettings.SetConfigSettings();
             killedPlayers.Clear();
             MessageWriter writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.ResetVaribles, Hazel.SendOption.None, -1);
             AmongUsClient.Instance.FinishRpcImmediately(writer);
@@ -74,6 +76,19 @@ namespace ExtraRolesMod
                 byte JokerId = JokerSettings.Joker.PlayerId;
 
                 writer.Write(JokerId);
+                AmongUsClient.Instance.FinishRpcImmediately(writer);
+            }
+
+            if (crewmates.Count > 0 && (rng.Next(1, 101) <= HarmonyMain.detectorSpawnChance.GetValue()))
+            {
+                writer = AmongUsClient.Instance.StartRpcImmediately(PlayerControl.LocalPlayer.NetId, (byte)CustomRPC.SetDetector, Hazel.SendOption.None, -1);
+                var DetectorRandom = rng.Next(0, crewmates.Count);
+                ConsoleTools.Info(DetectorRandom.ToString());
+                DetectorSettings.Detector = crewmates[DetectorRandom];
+                crewmates.RemoveAt(DetectorRandom);
+                byte DetectorId = DetectorSettings.Detector.PlayerId;
+
+                writer.Write(DetectorId);
                 AmongUsClient.Instance.FinishRpcImmediately(writer);
             }
 
