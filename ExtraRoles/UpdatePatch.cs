@@ -192,7 +192,7 @@ namespace ExtraRolesMod
                 }
                 if (DetectorSettings.Detector != null && __instance.UseButton != null && __instance.UseButton.isActiveAndEnabled && DetectorSettings.Detector.PlayerId == PlayerControl.LocalPlayer.PlayerId)
                 {
-                    KillButton.renderer.sprite = clockIco;
+                    KillButton.renderer.sprite = bodyIco;
                     KillButton.gameObject.SetActive(true);
                     KillButton.isActive = true;
                     DeadPlayer closestBody = PlayerTools.getClosestBody(PlayerControl.LocalPlayer);

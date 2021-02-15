@@ -35,9 +35,9 @@ namespace ExtraRolesMod
             float num = float.MaxValue;
             PlayerControl localPlayer = pc.Object;
             if (EngineerSettings.Engineer != null)
-                couldUse = (EngineerSettings.Engineer.PlayerId == PlayerControl.LocalPlayer.PlayerId && EngineerSettings.canUseVent || localPlayer.Data.IsImpostor) && !localPlayer.Data.IsDead;
+                couldUse = (EngineerSettings.Engineer.PlayerId == PlayerControl.LocalPlayer.PlayerId && EngineerSettings.canUseVent || localPlayer.Data.IsImpostor || VentExitPatch.ventEnterNumber < HarmonyMain.everyoneCanUseVent.GetValue()) && !localPlayer.Data.IsDead;
             else
-                couldUse = localPlayer.Data.IsImpostor && !localPlayer.Data.IsDead;
+                couldUse =  (VentExitPatch.ventEnterNumber < HarmonyMain.everyoneCanUseVent.GetValue()||localPlayer.Data.IsImpostor) && !localPlayer.Data.IsDead;
             canUse = couldUse;
             if ((DateTime.UtcNow - PlayerVentTimeExtension.GetLastVent(pc.Object.PlayerId)).TotalMilliseconds > 1000)
             {
@@ -61,8 +61,12 @@ namespace ExtraRolesMod
     [HarmonyPatch(typeof(Vent), "Method_1")]
     public static class VentExitPatch
     {
+        public static int ventEnterNumber = 0;
         public static void Postfix(PlayerControl NMEAPOJFNKA)
         {
+            if (NMEAPOJFNKA.PlayerId == PlayerControl.LocalPlayer.PlayerId){
+                ventEnterNumber++;
+            }
             PlayerVentTimeExtension.SetLastVent(NMEAPOJFNKA.PlayerId);
         }
     }

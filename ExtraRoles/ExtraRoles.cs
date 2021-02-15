@@ -84,7 +84,7 @@ namespace ExtraRolesMod
         public static Sprite repairIco;
         public static Sprite shieldIco;
         public static Sprite smallShieldIco;
-        public static Sprite clockIco;
+        public static Sprite bodyIco;
 
         public static void BreakShield(bool flag)
         {
@@ -151,7 +151,8 @@ namespace ExtraRolesMod
 
             public static void SetConfigSettings()
             {
-                showMedic = HarmonyMain.showMedic.GetValue();
+                showMedic = false;
+                //showMedic = HarmonyMain.showMedic.GetValue();
                 showProtected = HarmonyMain.showShieldedPlayer.GetValue();
                 showReport = HarmonyMain.medicReportSwitch.GetValue();
                 shieldKillAttemptIndicator = HarmonyMain.playerMurderIndicator.GetValue();
@@ -175,7 +176,8 @@ namespace ExtraRolesMod
 
             public static void SetConfigSettings()
             {
-                showOfficer = HarmonyMain.showOfficer.GetValue();
+                showOfficer = false;
+                //showOfficer = HarmonyMain.showOfficer.GetValue();
                 OfficerCD = HarmonyMain.OfficerKillCooldown.GetValue();
             }
         }
@@ -195,7 +197,8 @@ namespace ExtraRolesMod
 
             public static void SetConfigSettings()
             {
-                showEngineer = HarmonyMain.showEngineer.GetValue();
+                showEngineer = false;
+                //showEngineer = HarmonyMain.showEngineer.GetValue();
                 canUseVent = HarmonyMain.engineerCanUseVent.GetValue();
             }
         }
@@ -224,7 +227,8 @@ namespace ExtraRolesMod
 
             public static void SetConfigSettings()
             {
-                showJoker = HarmonyMain.showJoker.GetValue();
+                showJoker = false;
+                //showJoker = HarmonyMain.showJoker.GetValue();
                 jokerCanDieToOfficer = HarmonyMain.jokerCanDieToOfficer.GetValue();
             }
         }
@@ -240,7 +244,8 @@ namespace ExtraRolesMod
 
             public static void SetConfigSettings()
             {
-                showDetector = HarmonyMain.showDetector.GetValue();
+                showDetector = false;
+                //showDetector = HarmonyMain.showDetector.GetValue();
             }
         }
 

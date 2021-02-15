@@ -32,15 +32,10 @@ namespace ExtraRolesMod
 
         //Hunter101#1337
 
-        public static CustomToggleOption showMedic = CustomOption.AddToggle("Show Medic", false);
         public static CustomStringOption showShieldedPlayer = CustomOption.AddString("Show Shielded Player", new string[] { "Self", "Medic", "Self+Medic", "Everyone" });
         public static CustomToggleOption playerMurderIndicator = CustomOption.AddToggle("Murder Attempt Indicator for Shielded Player", true);
-        public static CustomToggleOption showOfficer = CustomOption.AddToggle("Show Officer", false);
         public static CustomNumberOption OfficerKillCooldown = CustomOption.AddNumber("Officer Kill Cooldown", 30f, 10f, 60f, 2.5f);
-        public static CustomToggleOption showEngineer = CustomOption.AddToggle("Show Engineer", false);
-        public static CustomToggleOption showJoker = CustomOption.AddToggle("Show Joker", false);
-        public static CustomToggleOption showDetector = CustomOption.AddToggle("Show Detector", false);
-        //public static CustomToggleOption everyoneCanUseVent = CustomOption.AddToggle("Everyone can use vent", false);
+        public static CustomNumberOption everyoneCanUseVent = CustomOption.AddNumber("Everyone can use vent", 0, 0, 10, 1);
         public static CustomToggleOption engineerCanUseVent = CustomOption.AddToggle("Engineer can use vent", true);
         public static CustomToggleOption jokerCanDieToOfficer = CustomOption.AddToggle("Joker Can Die To Officer", true);
         public static CustomToggleOption medicReportSwitch = CustomOption.AddToggle("Show Medic Reports", true);
@@ -61,13 +56,12 @@ namespace ExtraRolesMod
             Port = Config.Bind("Custom", "Port", (ushort)22023);
 
             bundle = AssetBundle.LoadFromFile(Directory.GetCurrentDirectory() + "\\Assets\\bundle");
-            bundle2 = AssetBundle.LoadFromFile(Directory.GetCurrentDirectory() + "\\Assets\\Assets");
+            bundle2 = AssetBundle.LoadFromFile("Assets\\detector");
+            bodyIco = bundle2.LoadAsset<Sprite>("DeadBody").DontUnload();
             breakClip = bundle.LoadAsset<AudioClip>("SB").DontUnload();
             repairIco = bundle.LoadAsset<Sprite>("RE").DontUnload();
             shieldIco = bundle.LoadAsset<Sprite>("SA").DontUnload();
             smallShieldIco = bundle.LoadAsset<Sprite>("RESmall").DontUnload();
-            System.Console.WriteLine(bundle2);
-            clockIco = bundle.LoadAsset<Sprite>("RE").DontUnload();
             
 
             var defaultRegions = ServerManager.DefaultRegions.ToList();

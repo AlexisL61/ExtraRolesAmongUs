@@ -304,11 +304,9 @@ namespace ExtraRolesMod
                 deadBody.KillerId = __instance.PlayerId;
                 deadBody.KillTime = DateTime.UtcNow;
                 deadBody.DeathReason = DeathReason.Kill;
-                System.Console.WriteLine("Dead");
                 deadBody.CanBeDetect = true;
                 deadBody.BodyPositionX = __instance.GetTruePosition()[0];
                 deadBody.BodyPositionY = __instance.GetTruePosition()[1];
-                System.Console.WriteLine("Dead2");
                 if (OfficerSettings.Officer != null)
                 {
                     //check if killer is officer
